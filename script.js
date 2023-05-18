@@ -4,18 +4,18 @@ document.addEventListener('click', function(e) {
         myFunction(e.target.id);
     }
 });
-var arr = new Array(15);
-for (var i = 0; i < 15; i++) {
-  arr[i] = new Array(15);
+var arr = new Array(16);
+for (var i = 0; i < 16; i++) {
+  arr[i] = new Array(16);
 }
-for (var i = 0; i < 15; i++) {
-    for (var j = 0; j < 15; j++) {
+for (var i = 0; i < 16; i++) {
+    for (var j = 0; j < 16; j++) {
       arr[i][j] =0;
     }
   }
-var tmp = new Array(15);
-    for (var i = 0; i < 15; i++) {
-      tmp[i] = new Array(15);
+var tmp = new Array(16);
+    for (var i = 0; i < 16; i++) {
+      tmp[i] = new Array(16);
     }   
 function myFunction(id) {
     console.log(id)
@@ -31,18 +31,18 @@ function myFunction(id) {
             document.getElementById(`${i}-${j}`).className = 'quadrat'
         }    
 }
-async function tick() {
-    await Cycle();
-    await RenderTheBoard();
+function tick() {
+    Cycle();
+    RenderTheBoard();
 }
 function Cycle(){ console.log('Cycle')
-for (var i = 0; i < 15; i++) {
-    for (var j = 0; j < 15; j++) {
+for (var i = 0; i < 16; i++) {
+    for (var j = 0; j < 16; j++) {
       tmp[i][j] =0;
     }
   }
-    for (var i = 0; i < 15; i++) {
-        for (var j = 0; j < 15; j++) {
+    for (var i = 0; i < 16; i++) {
+        for (var j = 0; j < 16; j++) {
             if (checkNeighbours(i, j)) {
                 tmp[i][j] = 1
             }
@@ -62,7 +62,7 @@ function checkNeighbours(i, j) {
     else {
         state = 0
     }
-    if (i+1 <=14) {
+    if (i+1 <=15) {
         if (arr[i+1][j] == 1){
             x++
         }
@@ -72,7 +72,7 @@ function checkNeighbours(i, j) {
             x++
         } 
     }
-    if (j+1 <=14) {
+    if (j+1 <=15) {
         if (arr[i][j+1] == 1){
             x++
         }
@@ -82,7 +82,7 @@ function checkNeighbours(i, j) {
             x++
         } 
     }
-    if (j-1 >=0 && i+1 <=14) {
+    if (j-1 >=0 && i+1 <=15) {
         if (arr[i+1][j-1] == 1){
             x++
         } 
@@ -92,12 +92,12 @@ function checkNeighbours(i, j) {
             x++
         } 
     }
-    if (j+1 <=14 && i+1 <=14) {
+    if (j+1 <=15 && i+1 <=15) {
         if (arr[i+1][j+1] == 1){
             x++
         } 
     }
-    if (j+1 <=14 && i-1 >=0) {
+    if (j+1 <=15 && i-1 >=0) {
         if (arr[i-1][j+1] == 1){
             x++
         } 
@@ -116,8 +116,8 @@ function checkNeighbours(i, j) {
     }
 }
 function RenderTheBoard() {
-    for (var i = 0; i < 15; i++) {
-        for (var j = 0; j < 15; j++) {
+    for (var i = 0; i < 16; i++) {
+        for (var j = 0; j < 16; j++) {
             arr[i][j] = tmp[i][j]
             if (arr[i][j] == 1) {document.getElementById(`${i}-${j}`).className = 'Taken'}
             else {document.getElementById(`${i}-${j}`).className = 'quadrat'}
@@ -128,7 +128,7 @@ function RenderTheBoard() {
 function startGame() {
     
     var game =0
-    if (!queue.length) {game = setInterval(tick, 500);
+    if (!queue.length) {game = setInterval(tick, 250);
         queue.push(game)
         document.getElementById('btn1').className = 'ingame'
         document.getElementById('btn1').textContent = 'Pause'
@@ -140,8 +140,8 @@ function startGame() {
     }
 }
 function cleanBoard() {
-    for (var i = 0; i < 15; i++) {
-        for (var j = 0; j < 15; j++) {
+    for (var i = 0; i < 16; i++) {
+        for (var j = 0; j < 16; j++) {
             arr[i][j] = 0
             if (arr[i][j] == 1) {document.getElementById(`${i}-${j}`).className = 'Taken'}
             else {document.getElementById(`${i}-${j}`).className = 'quadrat'}
